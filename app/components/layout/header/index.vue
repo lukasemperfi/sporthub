@@ -38,7 +38,7 @@ const handleAuth = () => {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  background: #fff;
+  background: var(--10);
   position: sticky;
   top: 0;
   z-index: 99998;
