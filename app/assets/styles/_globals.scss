@@ -1,0 +1,13 @@
+@use "functions" as functions;
+@use "mixins" as mixins;
+
+.h-2 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: functions.fluidValue(24px, 32px, 320px, 1440px);
+  line-height: functions.fluidValue(34px, 45px, 320px, 1440px);
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+@include mixins.custom-scrollbar;

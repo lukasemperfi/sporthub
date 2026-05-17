@@ -1,0 +1,48 @@
+@mixin form-control-base {
+  width: 100%;
+  background-color: #ffffff;
+  color: var(--black);
+
+  &::placeholder {
+    color: #565e67;
+  }
+
+  &:focus {
+    background-color: #ffffff;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: var(--black) !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@mixin custom-scrollbar {
+  *::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-size);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--sb-thumb-color-hover, var(--sb-thumb-color));
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+      scrollbar-width: thin;
+    }
+  }
+}
