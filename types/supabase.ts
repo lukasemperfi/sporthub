@@ -247,9 +247,9 @@ export type Database = {
           gender: string | null
           id: string
           instagram_url: string | null
-          is_creator: boolean | null
           last_name: string | null
           llc: string | null
+          role_id: string
           twitter_url: string | null
           video_views_count: number | null
           vimeo_url: string | null
@@ -268,9 +268,9 @@ export type Database = {
           gender?: string | null
           id: string
           instagram_url?: string | null
-          is_creator?: boolean | null
           last_name?: string | null
           llc?: string | null
+          role_id?: string
           twitter_url?: string | null
           video_views_count?: number | null
           vimeo_url?: string | null
@@ -289,12 +289,38 @@ export type Database = {
           gender?: string | null
           id?: string
           instagram_url?: string | null
-          is_creator?: boolean | null
           last_name?: string | null
           llc?: string | null
+          role_id?: string
           twitter_url?: string | null
           video_views_count?: number | null
           vimeo_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      roles: {
+        Row: {
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          description?: string | null
+          id: string
+          name: string
+        }
+        Update: {
+          description?: string | null
+          id?: string
+          name?: string
         }
         Relationships: []
       }

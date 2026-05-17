@@ -1,9 +1,19 @@
 :root {
-  --font-family: "Inter", sans-serif;
+  --font-family: "Uto", sans-serif;
+  --second-family: "Roboto", sans-serif;
+  --third-family: "Inter", sans-serif;
 
-  --black: #171a1e;
-  --error: #dc2626;
-  --gray: #171a1e33;
+  --10: #111;
+  --9: #222;
+  --8: #323232;
+  --7: #777;
+  --6: #999;
+  --5: #bbb;
+  --4: #eee;
+  --3: #fff;
+  --dark: #653012;
+  --middle: #8f5334;
+  --light: #ad7955;
 
   --sb-track-color: transparent;
   --sb-thumb-color: var(--black);
