@@ -4,6 +4,9 @@ const password = ref("");
 const textarea = ref("");
 const date = ref("");
 const radio = ref("1");
+
+const avatar = ref(null);
+const cover = ref(null);
 </script>
 
 <template>
@@ -41,7 +44,31 @@ const radio = ref("1");
       ]"
     />
     <p>Selected value: {{ radio }}</p>
-    <UiInputUpload />
+
+    <UiInputUpload
+      v-model="avatar"
+      title="Information about adding photo"
+      description="Information about adding photo. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+    >
+      <template #visual>
+        <UiInputUploadImagePreview
+          v-if="avatar"
+          :src="avatar"
+          variant="circle"
+        />
+        <UiInputUploadImagePlaceholderCircle v-else />
+      </template>
+    </UiInputUpload>
+
+    <UiInputUpload
+      v-model="cover"
+      title="Information about adding cover"
+      description="Information about adding photo. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+    >
+      <template #visual>
+        <UiInputUploadImagePlaceholderRect :src="cover" />
+      </template>
+    </UiInputUpload>
   </div>
 </template>
 

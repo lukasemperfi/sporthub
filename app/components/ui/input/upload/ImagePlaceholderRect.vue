@@ -1,13 +1,26 @@
+<script setup lang="ts">
+const { src = null } = defineProps<{
+  src?: string | null;
+}>();
+</script>
+
 <template>
   <div class="placeholder-rect">
     <div class="placeholder-rect__hero">
-      <UiIcon name="photo" class="placeholder-rect__icon" />
+      <img
+        v-if="src"
+        :src="src"
+        alt="Cover preview"
+        class="placeholder-rect__img"
+      />
+      <UiIcon v-else name="photo" class="placeholder-rect__icon" />
     </div>
-    <div class="placeholder-rect__bar placeholder-rect__bar--main"></div>
+
+    <div class="placeholder-rect__bar placeholder-rect__bar_main"></div>
     <div class="placeholder-rect__footer">
-      <div class="placeholder-rect__bar placeholder-rect__bar--sub"></div>
-      <div class="placeholder-rect__bar placeholder-rect__bar--sub"></div>
-      <div class="placeholder-rect__bar placeholder-rect__bar--sub"></div>
+      <div class="placeholder-rect__bar placeholder-rect__bar_sub"></div>
+      <div class="placeholder-rect__bar placeholder-rect__bar_sub"></div>
+      <div class="placeholder-rect__bar placeholder-rect__bar_sub"></div>
     </div>
   </div>
 </template>
@@ -16,7 +29,7 @@
 .placeholder-rect {
   width: 120px;
   height: 120px;
-  background: #222222; // #222222 из фигмы
+  background: #222222;
   border-radius: 12px;
   position: relative;
   padding: 10px;
@@ -25,32 +38,42 @@
   box-sizing: border-box;
 
   &__hero {
-    background: #ad7955; // light
+    background: var(--light);
     border-radius: 8px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__icon {
     width: 32px;
     height: 32px;
-    color: #653012; // dark
+
+    :deep(path) {
+      fill: var(--dark);
+    }
   }
 
   &__bar {
     background: #111111;
     border-radius: 2px;
 
-    &--main {
+    &_main {
       height: 8px;
       width: 100%;
       margin-bottom: 5px;
     }
 
-    &--sub {
+    &_sub {
       height: 19px;
       flex: 1;
     }

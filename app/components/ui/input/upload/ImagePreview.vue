@@ -1,12 +1,12 @@
-<script setup>
-defineProps({
-  src: { type: String, required: true },
-  variant: { type: String, default: "circle" }, // 'circle' | 'rect'
-});
+<script setup lang="ts">
+defineProps<{
+  src?: string;
+  variant?: "circle" | "rect";
+}>();
 </script>
 
 <template>
-  <div :class="['image-preview', `image-preview--${variant}`]">
+  <div :class="['image-preview', `image-preview_${variant}`]">
     <img :src="src" alt="Uploaded file" class="image-preview__img" />
   </div>
 </template>
@@ -17,11 +17,11 @@ defineProps({
   height: 120px;
   overflow: hidden;
 
-  &--circle {
+  &_circle {
     border-radius: 50%;
   }
 
-  &--rect {
+  &_rect {
     border-radius: 12px;
   }
 
