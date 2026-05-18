@@ -41,6 +41,7 @@ const radio = ref("1");
       ]"
     />
     <p>Selected value: {{ radio }}</p>
+    <UiInputUpload />
   </div>
 </template>
 
