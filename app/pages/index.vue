@@ -2,6 +2,8 @@
 const inputValue = ref("");
 const password = ref("");
 const textarea = ref("");
+const date = ref("");
+const radio = ref("1");
 </script>
 
 <template>
@@ -28,6 +30,17 @@ const textarea = ref("");
       label="Description"
       error="some description error"
     />
+    <UiInputDate v-model="date" label="Date" />
+    <UiInputRadioGroup
+      v-model="radio"
+      label="Radio group"
+      :options="[
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
+        { label: 'None', value: 'none' },
+      ]"
+    />
+    <p>Selected value: {{ radio }}</p>
   </div>
 </template>
 
