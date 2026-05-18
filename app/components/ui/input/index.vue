@@ -124,70 +124,20 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
-.ui-input {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  width: 100%;
-  font-family: var(--font-family);
+@import "./_shared.scss";
 
+.ui-input {
   &__label {
-    display: block;
-    margin-bottom: 4px;
     color: var(--3);
-    font-size: 14px;
     font-weight: 400;
   }
 
   &__control {
-    position: relative;
-    display: flex;
     align-items: center;
-    width: 100%;
-    background: var(--9);
-    padding-inline: 16px;
-    padding-block: 12px;
-    border-radius: 8px;
-    min-height: 48px;
   }
 
   &_is-disabled &__control {
-    opacity: 0.3;
-  }
-
-  &__field {
-    flex: 1 1 auto;
-    min-width: 0;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    padding: 0;
-    color: var(--black);
-    font: inherit;
-    font-weight: 400;
-    font-size: globalFunctions.fluidValue(14px, 16px, 320px, 1440px);
-
-    &::placeholder {
-      color: var(--6);
-      font-weight: 400;
-    }
-
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-
-  &__control:focus-within {
-    border-bottom-color: var(--black);
-  }
-
-  &_has-error &__control:focus-within {
-    border-bottom-color: var(--error);
+    cursor: default;
   }
 
   &__affix {
@@ -218,15 +168,14 @@ defineExpose({
     padding-right: 0;
   }
 
-  &__error {
-    position: absolute;
-    left: 16px;
-    top: calc(100% + 2px);
+  &__field {
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    }
+  }
 
-    margin: 0;
-    font-size: 10px;
-    line-height: 16px;
-    color: var(--error);
+  &_has-error &__control:focus-within {
+    border-bottom-color: var(--error);
   }
 }
 </style>

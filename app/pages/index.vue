@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const inputValue = ref("");
 const password = ref("");
+const textarea = ref("");
 </script>
 
 <template>
@@ -21,11 +22,20 @@ const password = ref("");
       </template>
     </UiInput>
     <UiInputPassword v-model="password" placeholder="Password" />
+    <UiInputTextarea
+      v-model="textarea"
+      placeholder="Description"
+      label="Description"
+      error="some description error"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .home-page {
   padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 </style>
