@@ -2,21 +2,16 @@
 import { computed, useAttrs } from "vue";
 
 type ButtonVariant = "solid" | "outline";
-type ButtonSize = "lg";
 
 type UiButtonProps = {
-  label?: string;
   disabled?: boolean;
   variant?: ButtonVariant;
-  size?: ButtonSize;
   type?: "button" | "submit" | "reset";
 };
 
 const props = withDefaults(defineProps<UiButtonProps>(), {
-  label: "Button",
   disabled: false,
   variant: "solid",
-  size: "lg",
   type: "button",
 });
 
@@ -25,14 +20,15 @@ const attrs = useAttrs();
 const className = computed(() => [
   "ui-button",
   `ui-button_variant_${props.variant}`,
-  `ui-button_size_${props.size}`,
   attrs.class,
 ]);
 </script>
 
 <template>
   <button :type="props.type" :disabled="props.disabled" :class="className">
-    <slot>{{ props.label }}</slot>
+    <slot name="left-icon" />
+    <slot />
+    <slot name="right-icon" />
   </button>
 </template>
 
@@ -43,18 +39,17 @@ const className = computed(() => [
   align-items: center;
   gap: 10px;
 
-  border-radius: 0;
+  border-radius: 8px;
   outline: none;
   user-select: none;
   cursor: pointer;
-
   font-family: inherit;
   font-weight: 600;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-size: 16px;
   text-align: center;
+  padding: 9px;
+  min-width: 180px;
+  min-height: 44px;
 
   transition:
     background-color 150ms ease,
@@ -72,34 +67,36 @@ const className = computed(() => [
     outline-offset: 3px;
   }
 
-  &_size_lg {
-    padding-block: 17px;
-    padding-inline: globalFunctions.fluidValue(16px, 38px, 320px, 1440px);
-  }
-
   &_variant_outline {
     background: transparent;
-    color: var(--black);
-    border: 1px solid var(--black);
+    color: var(--light);
+    border: 1px solid var(--light);
+
+    :deep(path) {
+      transition: 150ms ease;
+    }
 
     @media (hover: hover) {
       &:hover:not(:disabled) {
-        background: var(--black);
-        color: #ffffff;
+        background: var(--light);
+        color: var(--3);
+
+        :deep(path) {
+          fill: var(--3);
+        }
       }
     }
   }
 
   &_variant_solid {
-    background: var(--black);
-    color: #ffffff;
+    background: var(--light);
+    color: var(--3);
     border: 1px solid transparent;
 
     @media (hover: hover) {
       &:hover:not(:disabled) {
-        background: transparent;
-        color: var(--black);
-        border-color: var(--black);
+        background: var(--middle);
+        border-color: var(--middle);
       }
     }
   }
