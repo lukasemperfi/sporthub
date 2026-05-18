@@ -17,6 +17,7 @@ type UiInputProps = {
   disabled?: boolean;
   readonly?: boolean;
   error?: string | null;
+  label?: string;
 };
 
 const props = withDefaults(defineProps<UiInputProps>(), {
@@ -78,6 +79,7 @@ defineExpose({
 
 <template>
   <div :class="rootClass">
+    <label v-if="props.label" class="ui-input__label">{{ props.label }}</label>
     <div class="ui-input__control">
       <span v-if="hasLeft" class="ui-input__affix ui-input__affix_left">
         <slot name="left" />
@@ -125,16 +127,28 @@ defineExpose({
 .ui-input {
   position: relative;
   display: inline-flex;
+  flex-direction: column;
   width: 100%;
   font-family: var(--font-family);
+
+  &__label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--3);
+    font-size: 14px;
+    font-weight: 400;
+  }
 
   &__control {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
-    border-bottom: 1px solid var(--gray);
-    padding-bottom: globalFunctions.fluidValue(10px, 17px, 320px, 1440px);
+    background: var(--9);
+    padding-inline: 16px;
+    padding-block: 12px;
+    border-radius: 8px;
+    min-height: 48px;
   }
 
   &_is-disabled &__control {
@@ -145,25 +159,18 @@ defineExpose({
     flex: 1 1 auto;
     min-width: 0;
     height: 100%;
-
     border: none;
-    background: transparent;
+    background-color: transparent;
     outline: none;
     padding: 0;
-
     color: var(--black);
     font: inherit;
-    font-weight: 600;
+    font-weight: 400;
     font-size: globalFunctions.fluidValue(14px, 16px, 320px, 1440px);
-    text-transform: uppercase;
-
-    @media (max-width: globalBreakpoints.$breakpoint-xs) {
-      font-weight: 500;
-    }
 
     &::placeholder {
-      color: var(--black);
-      opacity: 0.2;
+      color: var(--6);
+      font-weight: 400;
     }
 
     &:-webkit-autofill {
@@ -188,18 +195,18 @@ defineExpose({
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
-
     width: 24px;
     height: 24px;
     color: var(--black);
+    cursor: pointer;
   }
 
   &__affix_left {
-    margin-right: 16px;
+    margin-right: 4px;
   }
 
   &__affix_right {
-    margin-left: 16px;
+    margin-left: 4px;
     justify-content: flex-end;
   }
 
@@ -211,13 +218,9 @@ defineExpose({
     padding-right: 0;
   }
 
-  &_has-error &__control {
-    border-bottom-color: var(--error);
-  }
-
   &__error {
     position: absolute;
-    left: 0;
+    left: 16px;
     top: calc(100% + 2px);
 
     margin: 0;
