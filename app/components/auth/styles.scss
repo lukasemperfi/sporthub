@@ -1,14 +1,27 @@
+@use "../../assets/styles/breakpoints" as globalBreakpoints;
+
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 40px;
   width: 100%;
-  padding: 20px;
+
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 36px;
+    color: var(--3);
+    text-align: center;
+
+    @media (max-width: globalBreakpoints.$breakpoint-sm) {
+      font-size: 32px;
+    }
+  }
 
   &__fields {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
   }
 
   &__password-wrapper {
@@ -16,10 +29,11 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 8px;
+    position: relative;
   }
 
   &__submit {
-    width: 100%;
+    align-self: center;
   }
 
   &__link {
@@ -32,17 +46,23 @@
     color: #171a1e;
 
     &--forgot {
-      font-size: 12px;
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 14px;
+      text-align: right;
+      color: var(--light);
+      position: absolute;
+      top: 0;
+      right: 0;
     }
 
-    &--center {
-      align-self: center;
+    &_signup {
+      font-family: var(--font-family);
+      font-weight: 600;
+      font-size: 16px;
       text-decoration: underline;
-      text-underline-offset: 4px;
-      opacity: 0.8;
-      &:hover {
-        opacity: 1;
-      }
+      text-decoration-skip-ink: none;
+      color: var(--light);
     }
   }
 
@@ -57,5 +77,13 @@
     padding: 20px 0;
     display: flex;
     justify-content: center;
+  }
+
+  &__signup {
+    align-self: center;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--6);
   }
 }

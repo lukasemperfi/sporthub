@@ -46,7 +46,6 @@
   }
   &__right {
     background-color: var(--10);
-    background-color: tan;
     padding-block: 24px;
     padding-inline: 80px;
   }

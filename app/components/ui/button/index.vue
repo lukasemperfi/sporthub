@@ -4,12 +4,15 @@ import { computed, useAttrs } from "vue";
 type ButtonVariant = "solid" | "outline";
 
 type UiButtonProps = {
+  as?: "button" | "link";
   disabled?: boolean;
   variant?: ButtonVariant;
   type?: "button" | "submit" | "reset";
+  to?: string;
 };
 
 const props = withDefaults(defineProps<UiButtonProps>(), {
+  as: "button",
   disabled: false,
   variant: "solid",
   type: "button",
@@ -25,11 +28,21 @@ const className = computed(() => [
 </script>
 
 <template>
-  <button :type="props.type" :disabled="props.disabled" :class="className">
+  <button
+    v-if="props.as === 'button'"
+    :type="props.type"
+    :disabled="props.disabled"
+    :class="className"
+  >
     <slot name="left-icon" />
     <slot />
     <slot name="right-icon" />
   </button>
+  <NuxtLink v-else :class="className" :to="to">
+    <slot name="left-icon" />
+    <slot />
+    <slot name="right-icon" />
+  </NuxtLink>
 </template>
 
 <style scoped lang="scss">
