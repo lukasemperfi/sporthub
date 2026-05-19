@@ -3,7 +3,13 @@
   <div class="creator-layout">
     <div class="app-container">
       <LayoutAuthSectionLayout>
-        <template #left> left content </template>
+        <template #left>
+          <TrainerCard
+            image-url="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600"
+            name="Devon Lane"
+            role="Fitness trainer"
+          />
+        </template>
         <template #right>
           <slot />
         </template>
@@ -18,6 +24,7 @@
 .creator-layout {
   position: relative;
   overflow: hidden;
+  padding-left: 50px;
 }
 
 .bg {
