@@ -4,11 +4,7 @@
     <div class="app-container">
       <LayoutAuthSectionLayout>
         <template #left>
-          <TrainerCard
-            image-url="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600"
-            name="Devon Lane"
-            role="Fitness trainer"
-          />
+          <TrainerCarousel />
         </template>
         <template #right>
           <slot />
@@ -25,6 +21,14 @@
   position: relative;
   overflow: hidden;
   padding-left: 50px;
+
+  :deep(.section-layout) {
+    .section-layout__left {
+      display: flex;
+      justify-content: center;
+      min-width: 0;
+    }
+  }
 }
 
 .bg {

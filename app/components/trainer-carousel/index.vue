@@ -1,0 +1,161 @@
+<script setup lang="ts">
+import type { SwiperOptions } from "swiper/types";
+
+const trainersLeft = ref([
+  {
+    id: 1,
+    imageUrl:
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop",
+    name: "Devon Lane",
+    role: "Fitness trainer",
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=600&auto=format&fit=crop",
+    name: "Kristin Watson",
+    role: "Rehabilitation specialist",
+  },
+  {
+    id: 3,
+    imageUrl:
+      "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop",
+    name: "Courtney Henry",
+    role: "Yoga guru",
+  },
+  {
+    id: 4,
+    imageUrl:
+      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop",
+    name: "Theresa Webb",
+    role: "Fitness trainer",
+  },
+]);
+const trainersRight = ref([
+  {
+    id: 1,
+    imageUrl:
+      "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=600&auto=format&fit=crop",
+    name: "Marcus Aurelius",
+    role: "CrossFit Coach",
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=600&auto=format&fit=crop",
+    name: "Elena Rostova",
+    role: "Pilates Instructor",
+  },
+  {
+    id: 3,
+    imageUrl:
+      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop",
+    name: "Dorian Yates",
+    role: "Bodybuilding Mentor",
+  },
+  {
+    id: 4,
+    imageUrl:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop",
+    name: "Amelie Vandal",
+    role: "Stretching & Yoga Expert",
+  },
+]);
+
+const carouselLeftOptions: Partial<SwiperOptions> = {
+  direction: "vertical",
+  slidesPerView: 2.2,
+  spaceBetween: 32,
+  loop: true,
+  speed: 4000,
+  autoplay: {
+    delay: 0,
+    disableOnInteraction: false,
+  },
+
+  allowTouchMove: false,
+};
+const carouselRightOptions: Partial<SwiperOptions> = {
+  direction: "vertical",
+  slidesPerView: 2.9,
+  spaceBetween: 24,
+  loop: true,
+  speed: 3034,
+  autoplay: {
+    delay: 0,
+    disableOnInteraction: false,
+    reverseDirection: true,
+  },
+
+  allowTouchMove: false,
+};
+</script>
+
+<template>
+  <div class="trainer-carousel">
+    <UiCarousel
+      :items="trainersLeft"
+      :options="carouselLeftOptions"
+      class="trainer-carousel__swiper trainer-carousel__swiper_left"
+    >
+      <template #item="{ item }">
+        <TrainerCard
+          :image-url="item.imageUrl"
+          :name="item.name"
+          :role="item.role"
+          class="trainer-carousel__card"
+        />
+      </template>
+    </UiCarousel>
+    <UiCarousel
+      :items="trainersRight"
+      :options="carouselRightOptions"
+      class="trainer-carousel__swiper trainer-carousel__swiper_right"
+    >
+      <template #item="{ item }">
+        <TrainerCard
+          :image-url="item.imageUrl"
+          :name="item.name"
+          :role="item.role"
+          class="trainer-carousel__card"
+        />
+      </template>
+    </UiCarousel>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.trainer-carousel {
+  position: relative;
+  width: 543px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  display: flex;
+  gap: 43px;
+  min-width: 0;
+
+  &__swiper {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+
+    &_left {
+      max-width: 280px;
+    }
+    &_right {
+      max-width: 220px;
+    }
+  }
+
+  &__card {
+    margin: 0 auto;
+  }
+
+  :deep(.swiper-wrapper) {
+    transition-timing-function: linear !important;
+  }
+}
+</style>

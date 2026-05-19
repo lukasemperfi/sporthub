@@ -71,7 +71,6 @@ defineProps<Props>();
 
     @container (width <= 220px) {
       font-size: 14px;
-      color: red;
     }
   }
 

@@ -34,8 +34,6 @@
 .section-layout {
   margin-inline: globalFunctions.fluidValue(-16px, -24px, 375px, 1440px);
   &__wrapper {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     position: relative;
     overflow: clip;
@@ -49,6 +47,7 @@
     background-color: var(--10);
     padding-block: 24px;
     padding-inline: 80px;
+    width: 580px;
   }
 
   .right {
