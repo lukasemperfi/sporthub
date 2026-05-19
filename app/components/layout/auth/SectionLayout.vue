@@ -32,6 +32,7 @@
 </template>
 <style lang="scss" scoped>
 .section-layout {
+  margin-inline: globalFunctions.fluidValue(-16px, -24px, 375px, 1440px);
   &__wrapper {
     display: flex;
     flex-direction: column;

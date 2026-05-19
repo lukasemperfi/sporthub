@@ -2,55 +2,38 @@ import * as yup from "yup";
 
 const phoneAllowedCharsRegex = /^[0-9+\s().-]+$/;
 
-export const loginSchema = yup.object({
+export const signInSchema = yup.object({
   email: yup
     .string()
     .trim()
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некорректный email")
-    .required("Введите email"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Uncorrect email")
+    .required("Enter your email"),
   password: yup
     .string()
-    .required("Введите пароль")
-    .min(6, "Минимум 6 символов"),
+    .required("Enter your password")
+    .min(6, "Minimum 6 characters"),
 });
 
-export const registerSchema = yup.object({
-  name: yup.string().required("Введите имя"),
-  phone: yup
-    .string()
-    .trim()
-    .matches(phoneAllowedCharsRegex, "Телефон содержит недопустимые символы")
-    .test(
-      "min-digits",
-      " Телефон должен содержать не менее 10 цифр",
-      (value) => {
-        const digits = String(value ?? "").replace(/\D/g, "");
-        return digits.length >= 10;
-      },
-    )
-    .max(25, "Телефон должен содержать не более 25 символов")
-    .required("Телефон обязателен"),
+export const signUpSchema = yup.object({
+  firstName: yup.string().required("Enter your first name"),
+  lastName: yup.string().required("Enter your last name"),
   email: yup
     .string()
     .trim()
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некорректный email")
-    .required("Введите email"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Uncorrect email")
+    .required("Enter your email"),
   password: yup
     .string()
-    .required("Введите пароль")
-    .min(6, "Минимум 6 символов"),
-  confirmPassword: yup
-    .string()
-    .required("Подтвердите пароль")
-    .oneOf([yup.ref("password")], "Пароли не совпадают"),
+    .required("Enter your password")
+    .min(6, "Minimum 6 characters"),
 });
 
 export const forgotSchema = yup.object({
   email: yup
     .string()
     .trim()
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некорректный email")
-    .required("Введите email"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Uncorrect email")
+    .required("Enter your email"),
 });
 
 export const contactsSchema = yup.object({
@@ -94,6 +77,6 @@ export const profileSchema = yup.object({
   email: yup
     .string()
     .trim()
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Некорректный email")
-    .required("Введите email"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Uncorrect email")
+    .required("Enter your email"),
 });

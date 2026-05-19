@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineProps<{
-  userType: "creator" | "viewer";
+  userRole: "creator" | "viewer";
 }>();
 const emit = defineEmits(["submit"]);
 
 const { handleSubmit, errors } = useForm({
-  validationSchema: loginSchema,
+  validationSchema: signInSchema,
 });
 
 const { value: email } = useField<string>("email");
@@ -37,20 +37,18 @@ const onSubmit = handleSubmit((values, actions) => {
 
         <NuxtLink
           class="auth-form__link auth-form__link--forgot"
-          :to="`/auth/${userType}/forgot`"
+          :to="`/auth/${userRole}/resetpassword`"
         >
           Forgot password?
         </NuxtLink>
       </div>
     </div>
 
-    <UiButton class="auth-form__submit" @click="onSubmit" variant="outline">
-      Sign in
-    </UiButton>
+    <UiButton class="auth-form__submit" @click="onSubmit"> Sign in </UiButton>
 
-    <div class="auth-form__signup">
+    <div class="auth-form__footer">
       Don’t have an account?
-      <NuxtLink :to="`/auth/${userType}/signup`" class="auth-form__link_signup"
+      <NuxtLink :to="`/auth/${userRole}/signup`" class="auth-form__link_auth"
         >Sign up</NuxtLink
       >
     </div>

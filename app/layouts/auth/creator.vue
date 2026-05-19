@@ -1,21 +1,23 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="creator-layout app-container">
-    <LayoutAuthSectionLayout>
-      <template #left> left content </template>
-      <template #right>
-        <slot />
-      </template>
-    </LayoutAuthSectionLayout>
-
+  <div class="creator-layout">
+    <div class="app-container">
+      <LayoutAuthSectionLayout>
+        <template #left> left content </template>
+        <template #right>
+          <slot />
+        </template>
+      </LayoutAuthSectionLayout>
+    </div>
     <img src="/ellipse.png" alt="creator-bg" class="bg bg_1" />
     <img src="/ellipse-2.png" alt="creator-bg" class="bg bg_2" />
+    <img src="/ellipse-3.png" alt="creator-bg" class="bg bg_3" />
   </div>
 </template>
 <style lang="scss" scoped>
 .creator-layout {
   position: relative;
-  overflow-y: clip;
+  overflow: hidden;
 }
 
 .bg {
@@ -31,6 +33,10 @@
   &_2 {
     bottom: -49vw;
     left: -30vw;
+  }
+  &_3 {
+    top: -49vw;
+    right: -30vw;
   }
 }
 </style>

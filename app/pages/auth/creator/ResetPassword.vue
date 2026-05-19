@@ -13,6 +13,6 @@ const onSubmit: (
 };
 </script>
 <template>
-  <AuthSignInForm @submit="onSubmit" user-role="creator" />
+  <AuthForgotForm @submit="onSubmit" user-role="creator" />
 </template>
 <style lang="scss" scoped></style>

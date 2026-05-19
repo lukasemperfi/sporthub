@@ -56,7 +56,7 @@
       right: 0;
     }
 
-    &_signup {
+    &_auth {
       font-family: var(--font-family);
       font-weight: 600;
       font-size: 16px;
@@ -67,10 +67,11 @@
   }
 
   &__text {
+    font-family: var(--font-family);
+    font-weight: 400;
     font-size: 14px;
-    line-height: 1.5;
     text-align: center;
-    color: #171a1e;
+    color: var(--4);
   }
 
   &__success {
@@ -79,7 +80,7 @@
     justify-content: center;
   }
 
-  &__signup {
+  &__footer {
     align-self: center;
     font-family: var(--font-family);
     font-weight: 400;
