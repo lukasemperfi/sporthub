@@ -28,43 +28,74 @@ const trainersLeft = ref([
     imageUrl:
       "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop",
     name: "Theresa Webb",
-    role: "Fitness trainer",
+    role: "Cardio Expert",
+  },
+  {
+    id: 5,
+    imageUrl:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop",
+    name: "Brian Johnson",
+    role: "Powerlifting Coach",
+  },
+  {
+    id: 6,
+    imageUrl:
+      "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=600&auto=format&fit=crop",
+    name: "Natalie Smith",
+    role: "Aerobics Instructor",
   },
 ]);
+
 const trainersRight = ref([
   {
-    id: 1,
+    id: 7,
     imageUrl:
       "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=600&auto=format&fit=crop",
     name: "Marcus Aurelius",
     role: "CrossFit Coach",
   },
   {
-    id: 2,
+    id: 8,
     imageUrl:
       "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=600&auto=format&fit=crop",
     name: "Elena Rostova",
     role: "Pilates Instructor",
   },
   {
-    id: 3,
+    id: 9,
     imageUrl:
-      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=600&auto=format&fit=crop",
     name: "Dorian Yates",
     role: "Bodybuilding Mentor",
   },
   {
-    id: 4,
+    id: 10,
     imageUrl:
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop",
     name: "Amelie Vandal",
-    role: "Stretching & Yoga Expert",
+    role: "Stretching Expert",
+  },
+  {
+    id: 11,
+    imageUrl:
+      "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=600&auto=format&fit=crop",
+    name: "Alex Carter",
+    role: "HIIT Specialist",
+  },
+  {
+    id: 12,
+    imageUrl:
+      "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=600&auto=format&fit=crop",
+    name: "Michael Chang",
+    role: "Functional Training Pro",
   },
 ]);
 
 const carouselLeftOptions: Partial<SwiperOptions> = {
   direction: "vertical",
-  slidesPerView: 2.2,
+  //   slidesPerView: 2.2,
+  slidesPerView: "auto",
+  freeMode: true,
   spaceBetween: 32,
   loop: true,
   speed: 4000,
@@ -77,7 +108,9 @@ const carouselLeftOptions: Partial<SwiperOptions> = {
 };
 const carouselRightOptions: Partial<SwiperOptions> = {
   direction: "vertical",
-  slidesPerView: 2.9,
+  //   slidesPerView: 2.9,
+  slidesPerView: "auto",
+  freeMode: true,
   spaceBetween: 24,
   loop: true,
   speed: 3034,
@@ -145,6 +178,11 @@ const carouselRightOptions: Partial<SwiperOptions> = {
     &_left {
       max-width: 280px;
 
+      :deep(.swiper-slide) {
+        width: 100%;
+        height: 340px;
+      }
+
       &:not(.swiper-initialized) {
         :deep(.swiper-wrapper) {
           display: grid;
@@ -164,6 +202,11 @@ const carouselRightOptions: Partial<SwiperOptions> = {
     }
     &_right {
       max-width: 220px;
+
+      :deep(.swiper-slide) {
+        width: 100%;
+        height: 280px;
+      }
 
       &:not(.swiper-initialized) {
         :deep(.swiper-wrapper) {
