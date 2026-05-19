@@ -144,9 +144,42 @@ const carouselRightOptions: Partial<SwiperOptions> = {
 
     &_left {
       max-width: 280px;
+
+      &:not(.swiper-initialized) {
+        :deep(.swiper-wrapper) {
+          display: grid;
+
+          row-gap: 32px;
+          overflow: hidden;
+
+          .swiper-slide {
+            aspect-ratio: 280/340;
+          }
+
+          .swiper-slide:nth-child(n + 4) {
+            display: none;
+          }
+        }
+      }
     }
     &_right {
       max-width: 220px;
+
+      &:not(.swiper-initialized) {
+        :deep(.swiper-wrapper) {
+          display: grid;
+          row-gap: 24px;
+          overflow: hidden;
+
+          .swiper-slide {
+            aspect-ratio: 220/280;
+          }
+
+          .swiper-slide:nth-child(n + 4) {
+            display: none;
+          }
+        }
+      }
     }
   }
 
