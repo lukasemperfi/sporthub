@@ -93,12 +93,11 @@ const trainersRight = ref([
 
 const carouselLeftOptions: Partial<SwiperOptions> = {
   direction: "vertical",
-  //   slidesPerView: 2.2,
   slidesPerView: "auto",
   freeMode: true,
   spaceBetween: 32,
   loop: true,
-  speed: 4000,
+  speed: 8000,
   autoplay: {
     delay: 0,
     disableOnInteraction: false,
@@ -108,12 +107,11 @@ const carouselLeftOptions: Partial<SwiperOptions> = {
 };
 const carouselRightOptions: Partial<SwiperOptions> = {
   direction: "vertical",
-  //   slidesPerView: 2.9,
   slidesPerView: "auto",
   freeMode: true,
   spaceBetween: 24,
   loop: true,
-  speed: 3034,
+  speed: 6068,
   autoplay: {
     delay: 0,
     disableOnInteraction: false,
