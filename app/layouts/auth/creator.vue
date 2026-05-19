@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 .creator-layout {
   position: relative;
-  overflow: hidden;
+  overflow-y: clip;
 }
 
 .bg {
