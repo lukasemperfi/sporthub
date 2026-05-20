@@ -3,7 +3,9 @@
   <div class="viewer-layout">
     <div class="app-container">
       <LayoutAuthSectionLayout>
-        <template #left> left content </template>
+        <template #left>
+          <MediaMasonry />
+        </template>
         <template #right>
           <slot />
         </template>
@@ -18,6 +20,26 @@
 .viewer-layout {
   position: relative;
   overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  :deep(.section-layout) {
+    .section-layout__wrapper {
+      height: 100vh;
+      min-height: auto;
+      overflow: auto;
+      max-height: 800px;
+    }
+    .section-layout__left {
+      padding-left: 33px;
+      overflow: hidden;
+
+      .media-masonry__grid {
+        transform: translateY(-20px);
+      }
+    }
+  }
 }
 
 .bg {
