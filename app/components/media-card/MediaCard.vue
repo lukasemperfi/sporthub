@@ -2,10 +2,20 @@
 interface Props {
   imageUrl: string;
   text: string;
+  audioUrl: string;
+  // Теперь карточка просто подписывается на состояние из родителя
+  isPlaying: boolean;
+  progress: number;
   width?: number;
   height?: number;
 }
+
 defineProps<Props>();
+
+// Карточка только сообщает о действии пользователя
+const emit = defineEmits<{
+  (e: "toggle"): void;
+}>();
 </script>
 
 <template>
@@ -14,10 +24,19 @@ defineProps<Props>();
     :style="{ width: `${width}px`, height: `${height}px` }"
   >
     <div class="media-card__player player">
-      <button class="player__play-button">
-        <UiIcon name="play" class="player__play-button-icon" />
+      <button class="player__play-button" @click="emit('toggle')">
+        <UiIcon
+          :name="isPlaying ? 'pause' : 'play'"
+          class="player__play-button-icon"
+        />
       </button>
-      <div class="player__progress-bar">progress bar</div>
+
+      <div
+        class="media-card__audio-wave"
+        :style="{ '--wave-progress': `${progress}%` }"
+      >
+        <UiAudioWaveIcon />
+      </div>
     </div>
     <p class="media-card__text">{{ text }}</p>
     <img :src="imageUrl" :alt="text" class="media-card__image" />
@@ -37,10 +56,6 @@ defineProps<Props>();
   padding: 12px;
 
   container-type: size;
-
-  // &__container {
-  //   container-type: inline-size;
-  // }
 
   .player {
     display: flex;
@@ -64,6 +79,7 @@ defineProps<Props>();
       background-color: rgba(0, 0, 0, 0.6);
       cursor: pointer;
       transition: background-color 0.2s ease-in-out;
+      flex: 1 0 auto;
 
       @container (height <= 118px) {
         width: 23px;
@@ -73,6 +89,7 @@ defineProps<Props>();
         .player__play-button-icon {
           width: 7px;
           height: 8px;
+          color: var(--3);
         }
       }
 
@@ -87,6 +104,11 @@ defineProps<Props>();
           background-color: rgba(0, 0, 0, 1);
         }
       }
+    }
+
+    &__play-button-icon {
+      width: 13px;
+      height: 13px;
     }
   }
 
