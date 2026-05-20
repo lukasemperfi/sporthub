@@ -29,7 +29,7 @@
       height: 100vh;
       min-height: auto;
       overflow: auto;
-      max-height: 830px;
+      max-height: 900px;
     }
     .section-layout__left {
       padding-left: 33px;
