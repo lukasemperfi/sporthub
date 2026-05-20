@@ -136,7 +136,7 @@ const waveHeight = computed(() => {
         />
       </button>
 
-      <div
+      <!-- <div
         class="player__audio-wave"
         :style="{
           '--wave-progress': `${progress}%`,
@@ -153,7 +153,9 @@ const waveHeight = computed(() => {
             maxHeight: `${waveHeight}px`,
           }"
         />
-      </div>
+      </div> -->
+
+      <MediaCardWave :progress="progress" :is-animated="isPlaying" />
     </div>
     <p class="media-card__text">{{ text }}</p>
     <img :src="imageUrl" :alt="text" class="media-card__image" />
