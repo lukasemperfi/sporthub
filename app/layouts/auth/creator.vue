@@ -28,6 +28,11 @@
       justify-content: center;
       min-width: 0;
     }
+    .right {
+      max-height: 800px;
+      align-self: center;
+      height: 100%;
+    }
   }
 }
 

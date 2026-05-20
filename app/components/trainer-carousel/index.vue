@@ -192,9 +192,9 @@ const carouselRightOptions: Partial<SwiperOptions> = {
             aspect-ratio: 280/340;
           }
 
-          .swiper-slide:nth-child(n + 4) {
-            display: none;
-          }
+          // .swiper-slide:nth-child(n + 4) {
+          //   display: none;
+          // }
         }
       }
     }
@@ -216,9 +216,9 @@ const carouselRightOptions: Partial<SwiperOptions> = {
             aspect-ratio: 220/280;
           }
 
-          .swiper-slide:nth-child(n + 4) {
-            display: none;
-          }
+          // .swiper-slide:nth-child(n + 4) {
+          //   display: none;
+          // }
         }
       }
     }

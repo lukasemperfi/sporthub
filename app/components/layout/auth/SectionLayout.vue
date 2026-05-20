@@ -48,6 +48,7 @@
     padding-block: 24px;
     padding-inline: 80px;
     width: 580px;
+    border-radius: 16px;
   }
 
   .right {
