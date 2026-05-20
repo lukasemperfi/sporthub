@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import type { SwiperOptions } from "swiper/types";
 
+const props = withDefaults(
+  defineProps<{
+    leftEnabled?: boolean;
+    rightEnabled?: boolean;
+  }>(),
+  {
+    leftEnabled: true,
+    rightEnabled: true,
+  },
+);
+
 const trainersLeft = ref([
   {
     id: 1,
@@ -125,6 +136,7 @@ const carouselRightOptions: Partial<SwiperOptions> = {
 <template>
   <div class="trainer-carousel">
     <UiCarousel
+      v-if="props.leftEnabled"
       :items="trainersLeft"
       :options="carouselLeftOptions"
       class="trainer-carousel__swiper trainer-carousel__swiper_left"
@@ -138,7 +150,28 @@ const carouselRightOptions: Partial<SwiperOptions> = {
         />
       </template>
     </UiCarousel>
+    <div
+      v-else
+      class="trainer-carousel__swiper trainer-carousel__swiper_left"
+    >
+      <div class="swiper-wrapper">
+        <div
+          v-for="item in trainersLeft"
+          :key="item.id"
+          class="swiper-slide"
+        >
+          <TrainerCard
+            :image-url="item.imageUrl"
+            :name="item.name"
+            :role="item.role"
+            class="trainer-carousel__card"
+          />
+        </div>
+      </div>
+    </div>
+
     <UiCarousel
+      v-if="props.rightEnabled"
       :items="trainersRight"
       :options="carouselRightOptions"
       class="trainer-carousel__swiper trainer-carousel__swiper_right"
@@ -152,6 +185,25 @@ const carouselRightOptions: Partial<SwiperOptions> = {
         />
       </template>
     </UiCarousel>
+    <div
+      v-else
+      class="trainer-carousel__swiper trainer-carousel__swiper_right"
+    >
+      <div class="swiper-wrapper">
+        <div
+          v-for="item in trainersRight"
+          :key="item.id"
+          class="swiper-slide"
+        >
+          <TrainerCard
+            :image-url="item.imageUrl"
+            :name="item.name"
+            :role="item.role"
+            class="trainer-carousel__card"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

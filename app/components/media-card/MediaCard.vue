@@ -18,7 +18,6 @@ const emit = defineEmits<{
   (e: "toggle"): void;
 }>();
 
-// Ссылка на родительский контейнер волны
 const waveRef = useTemplateRef<HTMLDivElement>("wave-container");
 
 const barsLarge = [
@@ -44,23 +43,19 @@ const bars = computed(() => {
   return barsLarge;
 });
 
-// Основная магия GSAP
 let tweens: gsap.core.Tween[] = [];
 
 const startAnimation = () => {
   if (!waveRef.value) return;
 
-  // Находим все бары внутри контейнера
   const barElements = waveRef.value.querySelectorAll(
     ".player__audio-wave__bar",
   );
 
   barElements.forEach((barEl) => {
-    // Читаем дефолтную высоту, которую задал Vue через пропсы
     const originalHeight =
       parseFloat(window.getComputedStyle(barEl).height) || 10;
 
-    // Запускаем бесконечную случайную пульсацию для каждого бара индивидуально
     const tween = gsap.to(barEl, {
       height: `random(${Math.max(2, originalHeight * 0.3)}, ${originalHeight * 1.8})`,
       duration: "random(0.25, 0.45)",
@@ -74,7 +69,6 @@ const startAnimation = () => {
 };
 
 const stopAnimation = () => {
-  // Убиваем все активные анимации
   tweens.forEach((t) => t.kill());
   tweens = [];
 
@@ -83,7 +77,6 @@ const stopAnimation = () => {
     ".player__audio-wave__bar",
   );
 
-  // Плавно возвращаем бары к их исходной высоте из массива
   barElements.forEach((barEl, index) => {
     const originalHeight = bars.value[index] || 2;
     gsap.to(barEl, {
@@ -94,12 +87,10 @@ const stopAnimation = () => {
   });
 };
 
-// Следим за статусом плеера
 watch(
   () => isPlaying,
   (playing) => {
     if (playing) {
-      // Небольшой таймаут, чтобы дождаться перерисовки DOM при изменении количества баров
       setTimeout(startAnimation, 50);
     } else {
       stopAnimation();
@@ -108,7 +99,6 @@ watch(
   { immediate: true },
 );
 
-// Если массив баров пересчитался на лету (изменился размер окна/высота), перезапускаем
 watch(bars, () => {
   if (isPlaying) {
     stopAnimation();

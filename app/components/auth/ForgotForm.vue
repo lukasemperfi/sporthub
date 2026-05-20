@@ -66,6 +66,8 @@ const handleSend = handleSubmit((values, actions) => {
 .auth-form {
   &__text {
     margin-top: 16px;
+    max-width: 420px;
+    align-self: center;
   }
 }
 </style>

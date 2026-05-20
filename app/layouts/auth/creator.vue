@@ -1,10 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useWindowSize } from "@vueuse/core";
+
+const { width: windowWidth } = useWindowSize();
+
+/** Ширина, с которой слайдеры включаются (синхронно с media в layout). */
+const SLIDER_MIN_WIDTH = 1440;
+
+const isLeftSliderEnabled = computed(
+  () => windowWidth.value >= SLIDER_MIN_WIDTH,
+);
+const isRightSliderEnabled = computed(
+  () => windowWidth.value >= SLIDER_MIN_WIDTH,
+);
+</script>
 <template>
   <div class="creator-layout">
     <div class="app-container">
       <LayoutAuthSectionLayout>
         <template #left>
-          <TrainerCarousel />
+          <TrainerCarousel
+            :left-enabled="isLeftSliderEnabled"
+            :right-enabled="isRightSliderEnabled"
+          />
         </template>
         <template #right>
           <slot />
@@ -22,16 +39,28 @@
   overflow: hidden;
   padding-left: 50px;
 
+  @media (max-width: 1439px) {
+    padding-left: 0;
+  }
+
   :deep(.section-layout) {
     .section-layout__left {
       display: flex;
       justify-content: center;
       min-width: 0;
+
+      @media (max-width: 1439px) {
+        display: none;
+      }
     }
     .right {
       max-height: 800px;
       align-self: center;
       height: 100%;
+
+      @media (max-width: 767px) {
+        max-height: 100%;
+      }
     }
   }
 }

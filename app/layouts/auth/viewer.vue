@@ -24,12 +24,22 @@
   display: flex;
   align-items: center;
 
+  :deep(.app-container) {
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+  }
+
   :deep(.section-layout) {
     .section-layout__wrapper {
       height: 100vh;
       min-height: auto;
       overflow: auto;
       max-height: 900px;
+
+      @media (max-width: 767px) {
+        max-height: 100vh;
+      }
     }
     .section-layout__left {
       padding-left: 33px;

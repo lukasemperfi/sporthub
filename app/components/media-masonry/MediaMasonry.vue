@@ -121,62 +121,62 @@ onUnmounted(() => {
   }
 });
 
-// onMounted(() => {
-//   if (!masonryContainer.value) return;
+onMounted(() => {
+  if (!masonryContainer.value) return;
 
-//   const cardElements = masonryContainer.value.querySelectorAll(
-//     ".media-masonry__card",
-//   );
+  const cardElements = masonryContainer.value.querySelectorAll(
+    ".media-masonry__card",
+  );
 
-//   cardElements.forEach((card) => {
-//     const durationX = 3 + Math.random() * 2.5;
-//     const durationY = 3.5 + Math.random() * 2.5;
-//     const moveX = 4 + Math.random() * 4;
-//     const moveY = 3 + Math.random() * 4;
+  cardElements.forEach((card) => {
+    const durationX = 3 + Math.random() * 2.5;
+    const durationY = 3.5 + Math.random() * 2.5;
+    const moveX = 4 + Math.random() * 4;
+    const moveY = 3 + Math.random() * 4;
 
-//     const tweens: gsap.core.Tween[] = [];
+    const tweens: gsap.core.Tween[] = [];
 
-//     tweens.push(
-//       gsap.to(card, {
-//         x: moveX,
-//         duration: durationX,
-//         repeat: -1,
-//         yoyo: true,
-//         ease: "sine.inOut",
-//       }),
-//     );
+    tweens.push(
+      gsap.to(card, {
+        x: moveX,
+        duration: durationX,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      }),
+    );
 
-//     tweens.push(
-//       gsap.to(card, {
-//         y: moveY,
-//         duration: durationY,
-//         repeat: -1,
-//         yoyo: true,
-//         ease: "sine.inOut",
-//       }),
-//     );
+    tweens.push(
+      gsap.to(card, {
+        y: moveY,
+        duration: durationY,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      }),
+    );
 
-//     card.addEventListener("mouseenter", () => {
-//       tweens.forEach((tween) => tween.pause());
-//       gsap.to(card, {
-//         scale: 1.01,
-//         rotateZ: 0.01,
-//         duration: 0.4,
-//         ease: "power2.out",
-//       });
-//     });
+    card.addEventListener("mouseenter", () => {
+      tweens.forEach((tween) => tween.pause());
+      gsap.to(card, {
+        scale: 1.01,
+        rotateZ: 0.01,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    });
 
-//     card.addEventListener("mouseleave", () => {
-//       tweens.forEach((tween) => tween.play());
-//       gsap.to(card, {
-//         scale: 1,
-//         rotateZ: 0,
-//         duration: 0.4,
-//         ease: "power2.out",
-//       });
-//     });
-//   });
-// });
+    card.addEventListener("mouseleave", () => {
+      tweens.forEach((tween) => tween.play());
+      gsap.to(card, {
+        scale: 1,
+        rotateZ: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    });
+  });
+});
 </script>
 
 <template>
