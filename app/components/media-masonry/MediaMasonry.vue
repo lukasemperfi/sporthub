@@ -38,7 +38,7 @@ const cards = ref([
   },
   {
     id: 5,
-    text: "Amet minim mollit non deserunt ullamco",
+    text: "Amet minim mollit non deserunt",
     img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=500",
     height: 160,
     width: 199,
@@ -54,7 +54,7 @@ const cards = ref([
   },
   {
     id: 7,
-    text: "Amet minim mollit non deserunt ullamco",
+    text: "Amet minim mollit non deserunt",
     img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500",
     height: 170,
     width: 211,

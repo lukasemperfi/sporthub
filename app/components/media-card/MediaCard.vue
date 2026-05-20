@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed, watch, useTemplateRef } from "vue";
+import { gsap } from "gsap";
+
 interface Props {
   imageUrl: string;
   text: string;
@@ -9,11 +12,14 @@ interface Props {
   height?: number;
 }
 
-const { height = 0 } = defineProps<Props>();
+const { height = 0, progress = 0, isPlaying } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "toggle"): void;
 }>();
+
+// Ссылка на родительский контейнер волны
+const waveRef = useTemplateRef<HTMLDivElement>("wave-container");
 
 const barsLarge = [
   2, 2, 6, 14, 22, 12, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 5, 12,
@@ -28,17 +34,92 @@ const barsMedium = [
 ];
 
 const barsSmall = [
-  2, 2, 6, 14, 22, 12, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 5, 12,
-  18, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 2, 4, 8, 4, 2,
+  2, 2, 4, 8, 13, 7, 2, 8, 12, 15, 5, 3, 2, 5, 8, 12, 7, 4, 3, 2, 3, 7, 11, 6,
+  2, 8, 12, 15, 5, 3, 2, 5, 8, 12, 8, 5, 4, 2,
 ];
 
 const bars = computed(() => {
-  if (height <= 118) {
-    return barsSmall;
-  } else if (height > 118 && height <= 170) {
-    return barsMedium;
-  }
+  if (height <= 118) return barsSmall;
+  if (height > 118 && height <= 170) return barsMedium;
   return barsLarge;
+});
+
+// Основная магия GSAP
+let tweens: gsap.core.Tween[] = [];
+
+const startAnimation = () => {
+  if (!waveRef.value) return;
+
+  // Находим все бары внутри контейнера
+  const barElements = waveRef.value.querySelectorAll(
+    ".player__audio-wave__bar",
+  );
+
+  barElements.forEach((barEl) => {
+    // Читаем дефолтную высоту, которую задал Vue через пропсы
+    const originalHeight =
+      parseFloat(window.getComputedStyle(barEl).height) || 10;
+
+    // Запускаем бесконечную случайную пульсацию для каждого бара индивидуально
+    const tween = gsap.to(barEl, {
+      height: `random(${Math.max(2, originalHeight * 0.3)}, ${originalHeight * 1.8})`,
+      duration: "random(0.25, 0.45)",
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    tweens.push(tween);
+  });
+};
+
+const stopAnimation = () => {
+  // Убиваем все активные анимации
+  tweens.forEach((t) => t.kill());
+  tweens = [];
+
+  if (!waveRef.value) return;
+  const barElements = waveRef.value.querySelectorAll(
+    ".player__audio-wave__bar",
+  );
+
+  // Плавно возвращаем бары к их исходной высоте из массива
+  barElements.forEach((barEl, index) => {
+    const originalHeight = bars.value[index] || 2;
+    gsap.to(barEl, {
+      height: `${originalHeight}px`,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  });
+};
+
+// Следим за статусом плеера
+watch(
+  () => isPlaying,
+  (playing) => {
+    if (playing) {
+      // Небольшой таймаут, чтобы дождаться перерисовки DOM при изменении количества баров
+      setTimeout(startAnimation, 50);
+    } else {
+      stopAnimation();
+    }
+  },
+  { immediate: true },
+);
+
+// Если массив баров пересчитался на лету (изменился размер окна/высота), перезапускаем
+watch(bars, () => {
+  if (isPlaying) {
+    stopAnimation();
+    setTimeout(startAnimation, 50);
+  }
+});
+
+const waveHeight = computed(() => {
+  if (height <= 118) return 17;
+  if (height > 118 && height <= 170) return 25;
+  return 29;
 });
 </script>
 
@@ -55,19 +136,21 @@ const bars = computed(() => {
         />
       </button>
 
-      <!-- <div
-        class="media-card__audio-wave"
-        :style="{ '--wave-progress': `${progress}%` }"
+      <div
+        class="player__audio-wave"
+        :style="{
+          '--wave-progress': `${progress}%`,
+          height: `${waveHeight}px`,
+        }"
+        ref="wave-container"
       >
-        <UiAudioWaveIcon />
-      </div> -->
-      <div class="player__audio-wave">
         <div
           v-for="(bar, index) in bars"
           :key="index"
           class="player__audio-wave__bar"
           :style="{
             height: `${bar}px`,
+            maxHeight: `${waveHeight}px`,
           }"
         />
       </div>
@@ -154,9 +237,7 @@ const bars = computed(() => {
 
       &__bar {
         width: 2px;
-
         background: var(--4);
-
         transition: background 0.2s ease;
       }
     }
