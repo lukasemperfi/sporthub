@@ -29,15 +29,11 @@
       height: 100vh;
       min-height: auto;
       overflow: auto;
-      max-height: 800px;
+      max-height: 830px;
     }
     .section-layout__left {
       padding-left: 33px;
       overflow: hidden;
-
-      .media-masonry__grid {
-        transform: translateY(-20px);
-      }
     }
   }
 }
