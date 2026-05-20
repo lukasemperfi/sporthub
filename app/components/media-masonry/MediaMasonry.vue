@@ -76,30 +76,27 @@ const isGlobalPlaying = ref(false);
 const globalProgress = ref(0);
 
 const handleTrackToggle = (card: { id: number | string; audioUrl: string }) => {
-  // 1. Если кликнули по той же карточке, которая УЖЕ играет -> пауза
   if (currentTrackId.value === card.id && isGlobalPlaying.value) {
     globalAudio.value?.pause();
     isGlobalPlaying.value = false;
     return;
   }
 
-  // 2. Если кликнули по той же карточке, которая на паузе -> плей
   if (currentTrackId.value === card.id && !isGlobalPlaying.value) {
     globalAudio.value?.play();
     isGlobalPlaying.value = true;
     return;
   }
 
-  // 3. Если включили ДРУГУЮ карточку
   if (globalAudio.value) {
     globalAudio.value.pause();
   }
 
-  currentTrackId.value = card.id; // Запоминаем ID новой карточки
+  currentTrackId.value = card.id;
   globalProgress.value = 0;
   isGlobalPlaying.value = true;
 
-  globalAudio.value = new Audio(card.audioUrl); // Запускаем её URL
+  globalAudio.value = new Audio(card.audioUrl);
 
   globalAudio.value.addEventListener("timeupdate", () => {
     if (!globalAudio.value) return;

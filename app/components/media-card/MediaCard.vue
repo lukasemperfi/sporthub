@@ -3,19 +3,43 @@ interface Props {
   imageUrl: string;
   text: string;
   audioUrl: string;
-  // Теперь карточка просто подписывается на состояние из родителя
   isPlaying: boolean;
   progress: number;
   width?: number;
   height?: number;
 }
 
-defineProps<Props>();
+const { height = 0 } = defineProps<Props>();
 
-// Карточка только сообщает о действии пользователя
 const emit = defineEmits<{
   (e: "toggle"): void;
 }>();
+
+const barsLarge = [
+  2, 2, 6, 14, 22, 12, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 5, 12,
+  18, 10, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 2, 2, 5, 12, 18, 10,
+  2, 14, 24, 29, 8, 4, 2, 8, 14, 20, 12, 14, 20, 25, 8, 4, 2, 8, 14, 20, 2, 4,
+  8, 4, 2,
+];
+
+const barsMedium = [
+  2, 2, 6, 14, 22, 12, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 5, 12, 8,
+  4, 2, 8, 14, 20, 2, 4, 8, 4, 2,
+];
+
+const barsSmall = [
+  2, 2, 6, 14, 22, 12, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 12, 6, 4, 2, 5, 12,
+  18, 2, 14, 20, 25, 8, 4, 2, 8, 14, 20, 2, 4, 8, 4, 2,
+];
+
+const bars = computed(() => {
+  if (height <= 118) {
+    return barsSmall;
+  } else if (height > 118 && height <= 170) {
+    return barsMedium;
+  }
+  return barsLarge;
+});
 </script>
 
 <template>
@@ -31,11 +55,21 @@ const emit = defineEmits<{
         />
       </button>
 
-      <div
+      <!-- <div
         class="media-card__audio-wave"
         :style="{ '--wave-progress': `${progress}%` }"
       >
         <UiAudioWaveIcon />
+      </div> -->
+      <div class="player__audio-wave">
+        <div
+          v-for="(bar, index) in bars"
+          :key="index"
+          class="player__audio-wave__bar"
+          :style="{
+            height: `${bar}px`,
+          }"
+        />
       </div>
     </div>
     <p class="media-card__text">{{ text }}</p>
@@ -109,6 +143,22 @@ const emit = defineEmits<{
     &__play-button-icon {
       width: 13px;
       height: 13px;
+    }
+
+    &__audio-wave {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      width: 100%;
+      // height: 64px;
+
+      &__bar {
+        width: 2px;
+
+        background: var(--4);
+
+        transition: background 0.2s ease;
+      }
     }
   }
 
