@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { gsap } from "gsap";
 
-const masonryContainer = ref<HTMLElement | null>(null);
-
 const cards = ref([
   {
     id: 1,
@@ -69,7 +67,7 @@ const cards = ref([
     audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
   },
 ]);
-
+const masonryContainer = ref<HTMLElement | null>(null);
 const currentTrackId = ref<number | string | null>(null);
 const globalAudio = ref<HTMLAudioElement | null>(null);
 const isGlobalPlaying = ref(false);
@@ -143,6 +141,7 @@ onMounted(() => {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       }),
     );
 
@@ -153,6 +152,7 @@ onMounted(() => {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       }),
     );
 
@@ -163,6 +163,7 @@ onMounted(() => {
         rotateZ: 0.01,
         duration: 0.4,
         ease: "power2.out",
+        force3D: true,
       });
     });
 
@@ -173,6 +174,7 @@ onMounted(() => {
         rotateZ: 0,
         duration: 0.4,
         ease: "power2.out",
+        force3D: true,
       });
     });
   });
