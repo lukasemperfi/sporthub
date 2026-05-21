@@ -168,12 +168,6 @@ defineExpose({
     padding-right: 0;
   }
 
-  &__field {
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
-    }
-  }
-
   &_has-error &__control:focus-within {
     border-bottom-color: var(--error);
   }

@@ -1,22 +1,12 @@
-@mixin form-control-base {
-  width: 100%;
-  background-color: #ffffff;
-  color: var(--black);
-
-  &::placeholder {
-    color: #565e67;
-  }
-
-  &:focus {
-    background-color: #ffffff;
-  }
-
+@mixin reset-input-autofill($bg: var(--9), $color: var(--3)) {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-    -webkit-text-fill-color: var(--black) !important;
+    -webkit-box-shadow: 0 0 0 1000px $bg inset !important;
+    box-shadow: 0 0 0 1000px $bg inset !important;
+    -webkit-text-fill-color: $color !important;
+    caret-color: $color;
     transition: background-color 5000s ease-in-out 0s;
   }
 }
