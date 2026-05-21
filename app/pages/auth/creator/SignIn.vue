@@ -27,7 +27,14 @@ const handleSignIn: (
 };
 </script>
 <template>
-  <AuthSignInForm @submit="handleSignIn" user-role="creator" />
-  <UiLoadingOverlay v-if="isLoading" />
+  <div class="creator-sign-in-page">
+    <AuthSignInForm @submit="handleSignIn" user-role="creator" />
+    <UiLoadingOverlay v-if="isLoading" />
+  </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.creator-sign-in-page {
+  position: relative;
+  width: 100%;
+}
+</style>
