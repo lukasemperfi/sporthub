@@ -150,16 +150,9 @@ const carouselRightOptions: Partial<SwiperOptions> = {
         />
       </template>
     </UiCarousel>
-    <div
-      v-else
-      class="trainer-carousel__swiper trainer-carousel__swiper_left"
-    >
+    <div v-else class="trainer-carousel__swiper trainer-carousel__swiper_left">
       <div class="swiper-wrapper">
-        <div
-          v-for="item in trainersLeft"
-          :key="item.id"
-          class="swiper-slide"
-        >
+        <div v-for="item in trainersLeft" :key="item.id" class="swiper-slide">
           <TrainerCard
             :image-url="item.imageUrl"
             :name="item.name"
@@ -185,16 +178,9 @@ const carouselRightOptions: Partial<SwiperOptions> = {
         />
       </template>
     </UiCarousel>
-    <div
-      v-else
-      class="trainer-carousel__swiper trainer-carousel__swiper_right"
-    >
+    <div v-else class="trainer-carousel__swiper trainer-carousel__swiper_right">
       <div class="swiper-wrapper">
-        <div
-          v-for="item in trainersRight"
-          :key="item.id"
-          class="swiper-slide"
-        >
+        <div v-for="item in trainersRight" :key="item.id" class="swiper-slide">
           <TrainerCard
             :image-url="item.imageUrl"
             :name="item.name"
@@ -223,7 +209,7 @@ const carouselRightOptions: Partial<SwiperOptions> = {
   &__swiper {
     width: 100%;
     height: 100%;
-    max-height: 100vh;
+    // max-height: 100vh;
 
     &_left {
       max-width: 280px;
