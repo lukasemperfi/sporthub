@@ -11,8 +11,8 @@ const { handleSubmit, errors } = useForm({
   validationSchema: signUpSchema,
 });
 
-const { value: firstName } = useField<string>("firstName");
-const { value: lastName } = useField<string>("lastName");
+const { value: first_name } = useField<string>("first_name");
+const { value: last_name } = useField<string>("last_name");
 const { value: email } = useField<string>("email");
 const { value: password } = useField<string>("password");
 
@@ -26,15 +26,15 @@ const onSubmit = handleSubmit(async (values, actions) => {
     <h1 class="auth-form__title">Sign up</h1>
     <div class="auth-form__fields">
       <UiInput
-        v-model="firstName"
+        v-model="first_name"
         placeholder="Your First Name"
-        :error="errors.firstName"
+        :error="errors.first_name"
         label="First name"
       />
       <UiInput
-        v-model="lastName"
+        v-model="last_name"
         placeholder=" Your Last Name"
-        :error="errors.lastName"
+        :error="errors.last_name"
         label="Last name"
       />
 

@@ -7,13 +7,33 @@ const radio = ref("1");
 
 const avatar = ref(null);
 const cover = ref(null);
+
+const { signOut } = useAuthApi();
+const user = useSupabaseUser();
+const router = useRouter();
+const isLoggedIn = computed(() => !!user.value);
+
+const logout = async () => {
+  await signOut();
+};
+
+const toAuthPage = () => {
+  router.push("/auth");
+};
 </script>
 
 <template>
   <div class="home-page">
-    home-page
+    <div v-if="isLoggedIn">
+      UserName: {{ user?.user_metadata?.first_name }} <br />
+      User Role:
+      {{ user?.user_metadata?.role }}
+      <UiButton @click="logout">Logout</UiButton>
+    </div>
 
-    <UiInput
+    <UiButton v-else @click="toAuthPage">Auth</UiButton>
+
+    <!-- <UiInput
       v-model="inputValue"
       error="dfgdfgdf dfhfgh"
       placeholder="Description"
@@ -67,8 +87,8 @@ const cover = ref(null);
     >
       <template #visual>
         <UiInputUploadImagePlaceholderRect :src="cover" />
-      </template>
-    </UiInputUpload>
+      </template> 
+    </UiInputUpload> -->
   </div>
 </template>
 

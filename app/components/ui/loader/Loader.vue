@@ -12,7 +12,6 @@ withDefaults(
 <template>
   <div class="loader" role="status" aria-live="polite" aria-busy="true">
     <span class="loader__spinner" aria-hidden="true" />
-    <!-- <span class="loader__label">{{ label }}</span> -->
   </div>
 </template>
 
@@ -31,14 +30,14 @@ withDefaults(
     box-sizing: border-box;
     width: 40px;
     height: 40px;
-    border: 3px solid var(--gray);
-    border-top-color: var(--black);
+    border: 3px solid var(--3);
+    border-top-color: var(--dark);
     border-radius: 50%;
     animation: loader-spin 0.75s linear infinite;
 
     @media (prefers-reduced-motion: reduce) {
       animation: none;
-      border-top-color: var(--black);
+      border-top-color: var(--dark);
       opacity: 0.85;
     }
   }

@@ -3,19 +3,30 @@ export const useAuthApi = () => {
   const user = useSupabaseUser();
 
   return {
-    async signUp(
-      email: string,
-      password: string,
-      fullName: string,
-      phone: string,
-    ) {
+    async signUp({
+      email,
+      password,
+      first_name,
+      last_name,
+      role = "viewer",
+      avatar_url,
+    }: {
+      email: string;
+      password: string;
+      first_name: string;
+      last_name: string;
+      role?: string;
+      avatar_url?: string;
+    }) {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            full_name: fullName,
-            phone: phone,
+            first_name,
+            last_name,
+            role,
+            avatar_url: avatar_url || null,
           },
         },
       });
@@ -45,7 +56,7 @@ export const useAuthApi = () => {
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("id", user.value.sub)
+        .eq("id", user.value.id)
         .single();
 
       if (error) {
@@ -57,16 +68,27 @@ export const useAuthApi = () => {
     },
 
     async updateProfile(updates: {
-      full_name?: string;
-      phone?: string;
+      first_name?: string;
+      last_name?: string;
       avatar_url?: string;
+      cover_url?: string;
+      gender?: string;
+      date_of_birth?: string;
+      address?: string;
+      description?: string;
+      vimeo_url?: string;
+      facebook_url?: string;
+      instagram_url?: string;
+      twitter_url?: string;
+      business_name?: string;
+      llc?: string;
     }) {
       if (!user.value) throw new Error("No user logged in");
 
       const { data, error } = await supabase
         .from("profiles")
         .update(updates)
-        .eq("id", user.value.sub)
+        .eq("id", user.value.id)
         .select()
         .single();
 
